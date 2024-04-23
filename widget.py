@@ -1,5 +1,6 @@
 # import tkinter as tk
 
+from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QHBoxLayout, QVBoxLayout, QApplication
 from pytube import YouTube
 from tkinter import filedialog
@@ -59,14 +60,24 @@ class YoutubeDownloader(QWidget):
         self.setLayout(self.v_layout)
 
     def download_video(self, url, filepath):
-        """
+        
         video_url = "https://www.youtube.com/watch?v=UY7ZP0KbBfI"
         yt = YouTube(video_url)
         stream_list = yt.streams
         
         for stream in stream_list:
             print(stream)
-        """
+        
+class StreamSelection(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("PySide6 Youtube Downloader")
+        self.init_ui()
+
+    def init_ui(self):
+        pass
+
+
 
     
     
