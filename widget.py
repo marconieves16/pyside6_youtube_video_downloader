@@ -1,8 +1,7 @@
-# import tkinter as tk
-
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QHBoxLayout, QVBoxLayout, QApplication, QCheckBox
 from pytube import YouTube
+from pytube.exceptions import RegexMatchError
 from tkinter import filedialog
 
 class YoutubeDownloader(QWidget):
@@ -59,15 +58,19 @@ class YoutubeDownloader(QWidget):
         self.setLayout(self.v_layout)
 
     def download_video(self, url, filepath):
-        #yt = YouTube(url)
-        #stream_list = yt.streams
-        
+        try:
+            yt = YouTube(url)
+            print(yt.title())
+        except RegexMatchError:
+            return
+        stream_list = yt.streams
+        self.open_new_window(stream_list)
         #for stream in stream_list:
         #    print(stream)
         pass
 
     def open_new_window(self):
-        self.new_window = StreamSelection("Hello from Main Window!")
+        self.new_window = StreamSelection()
         self.new_window.show()
         
 class StreamSelection(QWidget):
