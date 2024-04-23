@@ -30,7 +30,7 @@ class YoutubeDownloader(QWidget):
 
         # Buttons elements
         self.download_button = QPushButton("Download")
-        self.download_button.clicked.connect(self.download_video(self.url_field.text(), self.download_folder_field.text()))
+        self.download_button.clicked.connect(lambda:self.download_video(self.url_field.text(), self.download_folder_field.text()))
         self.exit_button = QPushButton("Exit")
         self.exit_button.clicked.connect(lambda:QApplication.exit())
 
@@ -60,17 +60,16 @@ class YoutubeDownloader(QWidget):
     def download_video(self, url, filepath):
         try:
             yt = YouTube(url)
-            print(yt.title())
         except RegexMatchError:
             return
-        stream_list = yt.streams
-        self.open_new_window(stream_list)
+        print(yt.title)
+        self.open_new_window(yt.streams)
         #for stream in stream_list:
         #    print(stream)
         pass
 
-    def open_new_window(self):
-        self.new_window = StreamSelection()
+    def open_new_window(self, stream_list):
+        self.new_window = StreamSelection(stream_list)
         self.new_window.show()
         
 class StreamSelection(QWidget):
@@ -87,7 +86,7 @@ class StreamSelection(QWidget):
 
     def load_stream_checkboxes(self):
         for stream in self.stream_list:
-            checkbox = QCheckBox(stream)
+            checkbox = QCheckBox(stream.resolution)
             self.v_layout.addWidget(checkbox)
 
 
