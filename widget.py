@@ -1,7 +1,7 @@
 # import tkinter as tk
 
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QHBoxLayout, QVBoxLayout, QApplication
+from PySide6.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QHBoxLayout, QVBoxLayout, QApplication, QCheckBox
 from pytube import YouTube
 from tkinter import filedialog
 
@@ -12,7 +12,7 @@ class YoutubeDownloader(QWidget):
         """Initizing"""
 
         super().__init__()
-        self.setWindowTitle("PySide6 Youtube Downloader")
+        self.setWindowTitle("Youtube Downloader")
         self.init_ui()
 
     def init_ui(self):
@@ -31,8 +31,7 @@ class YoutubeDownloader(QWidget):
 
         # Buttons elements
         self.download_button = QPushButton("Download")
-        self.download_button.clicked.connect(self.download_video(self.url_field.text(), 
-                                                                 self.download_folder_field.text()))
+        self.download_button.clicked.connect(self.download_video(self.url_field.text(), self.download_folder_field.text()))
         self.exit_button = QPushButton("Exit")
         self.exit_button.clicked.connect(lambda:QApplication.exit())
 
@@ -60,22 +59,35 @@ class YoutubeDownloader(QWidget):
         self.setLayout(self.v_layout)
 
     def download_video(self, url, filepath):
+        #yt = YouTube(url)
+        #stream_list = yt.streams
         
-        video_url = "https://www.youtube.com/watch?v=UY7ZP0KbBfI"
-        yt = YouTube(video_url)
-        stream_list = yt.streams
-        
-        for stream in stream_list:
-            print(stream)
+        #for stream in stream_list:
+        #    print(stream)
+        pass
+
+    def open_new_window(self):
+        self.new_window = StreamSelection("Hello from Main Window!")
+        self.new_window.show()
         
 class StreamSelection(QWidget):
-    def __init__(self):
+    def __init__(self, stream_list):
         super().__init__()
-        self.setWindowTitle("PySide6 Youtube Downloader")
+        self.setWindowTitle("Stream selector")
+        self.stream_list = stream_list
         self.init_ui()
 
     def init_ui(self):
-        pass
+        self.v_layout = QVBoxLayout()
+        self.load_stream_checkboxes()
+        self.setLayout(self.v_layout)
+
+    def load_stream_checkboxes(self):
+        for stream in self.stream_list:
+            checkbox = QCheckBox(stream)
+            self.v_layout.addWidget(checkbox)
+
+
 
 
 
