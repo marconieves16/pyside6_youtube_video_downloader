@@ -20,7 +20,9 @@ class YoutubeDownloader(QWidget):
         self.url_field = QLineEdit()
 
         # Folder elements
-        self.download_folder_label = QLabel("Download Folder")
+        self.download_folder_label = QPushButton("Download Folder")
+        self.download_folder_label.clicked.connect(self.select_download_folder())
+
         self.download_folder_field = QLineEdit()
 
         # Buttons elements
@@ -53,13 +55,17 @@ class YoutubeDownloader(QWidget):
         self.setLayout(self.v_layout)
 
     def download_video(self, url, filepath):
+        """
         video_url = "https://www.youtube.com/watch?v=UY7ZP0KbBfI"
         yt = YouTube(video_url)
         stream_list = yt.streams
         
         for stream in stream_list:
             print(stream)
+        """
 
+    def select_download_folder(self):
+        pass
         
 
 
