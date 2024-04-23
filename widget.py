@@ -1,6 +1,6 @@
 # import tkinter as tk
 
-from PySide6.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QHBoxLayout, QVBoxLayout
+from PySide6.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QHBoxLayout, QVBoxLayout, QApplication
 from pytube import YouTube
 from tkinter import filedialog
 
@@ -32,7 +32,8 @@ class YoutubeDownloader(QWidget):
         self.download_button = QPushButton("Download")
         self.download_button.clicked.connect(self.download_video(self.url_field.text(), 
                                                                  self.download_folder_field.text()))
-        self.quit_button = QPushButton("Quit")
+        self.exit_button = QPushButton("Exit")
+        self.exit_button.clicked.connect(lambda:QApplication.exit())
 
         # Layout elements
         self.url_layout = QHBoxLayout()
@@ -47,7 +48,7 @@ class YoutubeDownloader(QWidget):
         self.folder_layout.addWidget(self.download_folder_label)
         self.folder_layout.addWidget(self.download_folder_field)
 
-        self.button_layout.addWidget(self.quit_button)
+        self.button_layout.addWidget(self.exit_button)
         self.button_layout.addWidget(self.download_button)
 
         self.v_layout.addLayout(self.url_layout)
@@ -67,9 +68,7 @@ class YoutubeDownloader(QWidget):
             print(stream)
         """
 
-    #def select_download_folder(self):
-    #    folder_selected = filedialog.askdirectory()
-    #    return folder_selected
+    
     
     
         
