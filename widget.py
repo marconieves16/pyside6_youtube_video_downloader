@@ -90,7 +90,7 @@ class StreamSelection(QWidget):
             resolution = QCheckBox(stream.resolution)
             file_size = QCheckBox(str(stream.filesize_mb))
             type = QCheckBox(stream.type)
-
+            
             self.h_layout.addWidget(resolution)
             self.h_layout.addWidget(file_size)
             self.h_layout.addWidget(type)
