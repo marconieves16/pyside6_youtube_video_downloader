@@ -81,13 +81,21 @@ class StreamSelection(QWidget):
 
     def init_ui(self):
         self.v_layout = QVBoxLayout()
+        self.h_layout = QHBoxLayout()
         self.load_stream_checkboxes()
         self.setLayout(self.v_layout)
 
     def load_stream_checkboxes(self):
         for stream in self.stream_list:
-            checkbox = QCheckBox(stream.resolution)
-            self.v_layout.addWidget(checkbox)
+            resolution = QCheckBox(stream.resolution)
+            file_size = QCheckBox(str(stream.filesize_mb))
+            type = QCheckBox(stream.type)
+
+            self.h_layout.addWidget(resolution)
+            self.h_layout.addWidget(file_size)
+            self.h_layout.addWidget(type)
+
+            self.v_layout.addLayout(self.h_layout)
 
 
 
